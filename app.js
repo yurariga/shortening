@@ -1,7 +1,6 @@
 const shortening = (givenValue, desiredValueUnit) => {
     let shortenedValue = givenValue;
-  
-    if (typeof(givenValue) === 'number' || givenValue === undefined || givenValue === null) {
+    if (typeof(shortenedValue) === 'number') {
         switch(desiredValueUnit) {
             case 'K':
                 shortenedValue = givenValue / 1e3;
@@ -25,14 +24,19 @@ const shortening = (givenValue, desiredValueUnit) => {
                 shortenedValue = givenValue;
                 break;
         }
+    } else if (desiredValueUnit === undefined || desiredValueUnit === null) {
+        return result = {
+            value: shortenedValue, 
+            valueUnit: ''
+        }
     } else {
-        console.log('Not a number type')
         shortenedValue = undefined;
         return result = {
             value: shortenedValue, 
             valueUnit: desiredValueUnit
         }
     }
+    
     return result = {
         value: shortenedValue, 
         valueUnit: desiredValueUnit
@@ -63,7 +67,6 @@ const getNumberClass = (number) => {
             valueUnit: detectedValueUnit
         }
     } catch(error) {
-        console.log(`Error catched ${error}`)
         return result = {
             value: undefined, 
             valueUnit: undefined
@@ -76,8 +79,8 @@ module.exports = shortening;
 
 
 
-// console.log(shortening(123, 'K'));
-// console.log(shortening(123, 'K', 100, a));
+// console.log(shortening(undefined, null));
+// console.log(shortening('123K', undefined));
 // console.log(shortening(123));
 // console.log(shortening());
 
@@ -93,7 +96,7 @@ module.exports = shortening;
 // console.log(shortening(null, ''))
 // console.log(shortening(1234567891234))
 // console.log(shortening('invalid'))
-console.log(shortening('K'))
+// console.log(shortening('K'))
 //console.log(shortening("number"))
 
 
