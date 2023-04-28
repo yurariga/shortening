@@ -30,7 +30,6 @@ const shortening = (givenValue, desiredValueUnit) => {
             valueUnit: ''
         }
     } else {
-        shortenedValue = undefined;
         return result = {
             value: shortenedValue, 
             valueUnit: desiredValueUnit
@@ -41,7 +40,6 @@ const shortening = (givenValue, desiredValueUnit) => {
         value: shortenedValue, 
         valueUnit: desiredValueUnit
     }
-
 };
 
 const getNumberClass = (number) => {
@@ -75,30 +73,3 @@ const getNumberClass = (number) => {
 }
 
 module.exports = shortening;
-
-
-
-
-// console.log(shortening(undefined, null));
-// console.log(shortening('123K', undefined));
-// console.log(shortening(123));
-// console.log(shortening());
-
-// console.log(shortening(-1000000, 'K'));
-// console.log(shortening(-123000000, 'M'));
-
-// console.log(shortening(undefined, 'K'));
-// console.log(shortening(12345, ''));
-// console.log(shortening(undefined, ''))
-// console.log(shortening(undefined, ''))
-// console.log(shortening('undefined'));
-// console.log(shortening());
-// console.log(shortening(null, ''))
-// console.log(shortening(1234567891234))
-// console.log(shortening('invalid'))
-// console.log(shortening('K'))
-//console.log(shortening("number"))
-
-
-
-

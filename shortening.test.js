@@ -1,6 +1,6 @@
-const shortening = require('./app');
+const shortening = require('./shortening');
 
-describe('Checking function should accept 2 parameters', () => {
+describe('Checking Shortening function should accept 2 parameters', () => {
     const parameter1 = 123;
     const parameter2 = 'K';
     it(
@@ -16,10 +16,10 @@ describe('Checking function should accept 2 parameters', () => {
 
 describe('Checking supported valueUnits', () => {
     const suppotedUnits = ['', 'K', 'M', 'bn', 'T'];
-    for (let i = 0; i < suppotedUnits.length; i++) {
+    for ( let i = 0; i < suppotedUnits.length; i++ ) {
         const randomNumber = Math.floor(Math.random() * 1e12) 
         it(
-            `Incoming nuber ${randomNumber} and unit ${JSON.stringify(suppotedUnits[i])}; Supported units ${JSON.stringify(suppotedUnits)}`,
+            `Testing unit ${JSON.stringify(suppotedUnits[i])}`,
             () => {
                 expect(suppotedUnits.includes(shortening(randomNumber, suppotedUnits[i]).valueUnit)).toBe(true);
             }
@@ -29,7 +29,7 @@ describe('Checking supported valueUnits', () => {
 );
 
 describe(
-    'Checking desiredValueUnit appropriately returned', 
+    'Checking given value is converted to desiredValue unit', 
     () => {
         const testCases = [
             {
@@ -53,11 +53,10 @@ describe(
 
         testCases.forEach( test => {
             it(
-                `Incoming nuber : ${
+                `Incoming arguments : ${
                         [test.incoming[0], 
-                        test.incoming[1]]
-                }; Expecting { value: ${test.expected[0]},
-                        valueUnit: ${JSON.stringify(test.expected[1])} }`,
+                        JSON.stringify(test.incoming[1])]
+                }; Expecting { value: ${test.expected[0]}, valueUnit: ${JSON.stringify(test.expected[1])} }`,
                 () => {
                     expect(shortening(test.incoming[0], test.incoming[1])).toMatchObject({
                         value: test.expected[0],
@@ -80,8 +79,7 @@ describe('Checking for invalid desiredValueUnit', () => {
     )
 });
 
-describe('Checking nuber is automaticaly shortened, when no desiredValueUnit passed', () => {
-    const randomNubers = [12345, 123456789, 9999999999, 1234567890123];
+describe('Checking nuber is automaticaly shortened, when no desiredValueUnit is passed', () => {
     const testCases = [
         {
             incoming: [123],
@@ -104,9 +102,10 @@ describe('Checking nuber is automaticaly shortened, when no desiredValueUnit pas
             expected: [1.234567890123, 'T']
         },
     ];
+    
     testCases.forEach( test => {
         it(
-            `Incoming number : ${test.incoming[0]}; Expecting result: { value: ${test.expected[0]}, valueUnit: ${test.expected[1]} }`,
+            `Incoming number : ${test.incoming[0]}; Expecting result: { value: ${test.expected[0]}, valueUnit: ${JSON.stringify(test.expected[1])} }`,
             () => {[0]
                 expect(shortening(test.incoming[0])).toMatchObject({
                     value: test.expected[0],
@@ -122,10 +121,10 @@ describe('Checking for invalid givenValue', () => {
     const parameter1 = '1234K';
     const parameter2 = 'K';
     it(
-        `Incoming givenValue : ${JSON.stringify(parameter1)} and Incoming desiredUnitValue : ${JSON.stringify(parameter2)}; Expecting result: { value: ${undefined}, valueUnit: ${JSON.stringify(parameter2)} }`,
+        `Incoming givenValue : ${JSON.stringify(parameter1)} and Incoming desiredUnitValue : ${JSON.stringify(parameter2)}; Expecting result: { value: ${JSON.stringify(parameter1)}, valueUnit: ${JSON.stringify(parameter2)} }`,
         () => {
             expect(shortening(parameter1, parameter2)).toMatchObject({
-                value: undefined,
+                value: parameter1,
                 valueUnit: parameter2
             });
         }
@@ -154,9 +153,7 @@ describe('Checking for invalid givenValue and desiredValueUnit', () => {
                 });
             }
         )
-    })
-    
-    
+    })   
 });
 
 

@@ -2,7 +2,7 @@
   "name": "zoom-charts",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "shortening.js",
   "scripts": {
     "test": "jest"
   },
